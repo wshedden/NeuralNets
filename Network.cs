@@ -11,6 +11,13 @@ namespace NeuralNets{
             }
         }
 
+        public void Propagate(){
+            for(int i = 0; i < layers.Length; i++){
+                double[] prevLayerValues = new double[layers[i-1].Neurons.Length];
+                
+            }
+        }
+
         public void PrintNeuronValues(){
             Array.ForEach(layers, layer => layer.PrintNeuronValues());
         }

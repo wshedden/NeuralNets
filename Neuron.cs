@@ -4,6 +4,7 @@ namespace NeuralNets {
     class Neuron {
         private double[] weights;
         private double bias;
+        private double val;
         public Neuron (int weightNum = 0) {
             weights = new double[weightNum];
         }
@@ -38,6 +39,15 @@ namespace NeuralNets {
             }
             set {
                 bias = value;
+            }
+        }
+
+        public double Val{
+            get{
+                return val;
+            }
+            set{
+                val = value;
             }
         }
 
