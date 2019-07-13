@@ -14,6 +14,7 @@ namespace NeuralNets{
         }
 
         public void PrintNeuronValues(){
+            
             if(!isInput) Array.ForEach(neurons, neuron => neuron.PrintNeuronValues());
         }
 

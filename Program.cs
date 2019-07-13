@@ -8,15 +8,12 @@ namespace NeuralNets {
             Network net = new Network (dimensions);
             net.PrintNeuronValues();
 
-            int[] arr1 = new int[]{1, 2, 3};
-            int[] arr2 = arr1;
+            
             
         }
 
     
     }
-
-
 
     class NetMath{
         public static double Sum(double[] arr){
@@ -54,6 +51,10 @@ namespace NeuralNets {
             for(int i = 0; i < arr.Length; i++)
                 arr[i] = i;
             return arr;
+        }
+
+        public static double Sigmoid(double n){
+            return 1d / (1d + (double) Math.Exp(-n));
         }
     }
 }
