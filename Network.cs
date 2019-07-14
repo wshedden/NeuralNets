@@ -24,8 +24,27 @@ namespace NeuralNets{
             }
         }
 
-        public void Train(Dataset dataset){
+        public void Train(Dataset dataset, double learningRate = 0.1){
+            double averageError = GetDatasetError(dataset);
 
+        }
+
+        private double GetDatasetError(Dataset dataset){
+            //Calculate average error for entire dataset
+            double[] errors = new double[dataset.numOfDataPoints];
+
+            for(int i = 0; i < dataset.numOfDataPoints; i++){
+
+                double[] inputs = dataset.Inputs[i];
+                double[] expected = dataset.Expected[i];
+                double[] outputs = OutVal(inputs);
+
+                double error = CalculateError(outputs, expected);
+                errors[i] = error;
+                
+            }
+            double averageError = NetMath.Sum(errors)/dataset.numOfDataPoints;
+            return averageError;
         }
 
         public void BackPropagate(){
@@ -53,8 +72,22 @@ namespace NeuralNets{
             return GetOutputs();
         }
 
-        private void CalculateError(){
+        public void Reset(){
+            double[] emptyInputList = new double[layers[0].Neurons.Length];
+            for(int i = 0; i < emptyInputList.Length; i++){
+                emptyInputList[i] = 0;
+            }
+            SetInputs(emptyInputList);
+        }
 
+        private double CalculateError(double[] outputs, double[] expected){ //For one line of data
+            //Must Propagate() first 
+            double[] squaredDifferenceArray = new double[outputs.Length];
+            for(int i = 0; i < outputs.Length; i++){
+                squaredDifferenceArray[i] = Math.Pow(expected[i] - outputs[i], 2);
+            }
+            double avgSquaredDifference = NetMath.Sum(squaredDifferenceArray)/outputs.Length;
+            return avgSquaredDifference;
         }
 
         

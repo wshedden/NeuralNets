@@ -6,8 +6,10 @@ namespace NeuralNets {
 
         public int inputSize;
         public int expectedSize;
+        public int numOfDataPoints;
         private List<double[]> inputs;
         private List<double[]> expected;
+
 
         public Dataset (int inputSize, int expectedSize) {
             this.inputSize = inputSize;
@@ -56,6 +58,7 @@ namespace NeuralNets {
                 }
                 AddDataPair(inputList, expectedList);
             }
+            numOfDataPoints = inputs.ToArray().Length;
 
         }
 
