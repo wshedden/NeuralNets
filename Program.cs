@@ -62,10 +62,6 @@ namespace NeuralNets {
             return arr;
         }
 
-        public static double Sigmoid (double x, bool derivative = false) {
-            if(derivative)
-                return Math.Exp(-x)/Math.Pow((1+Math.Exp(-x)), 2);
-            return 1d / (1d + (double) Math.Exp (-x));
-        }
+        
     }
 }

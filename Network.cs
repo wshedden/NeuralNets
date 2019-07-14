@@ -5,6 +5,10 @@ namespace NeuralNets{
         private Layer[] layers;
         public double error;
         public Network(int[] dimensions){
+            if(dimensions.Length <= 2){
+                Console.WriteLine("[ERROR]: At least 3 layers required");
+                return;
+            }
             layers = new Layer[dimensions.Length];
             layers[0] = new Layer(dimensions[0], isInput: true);
             for(int i = 1; i < layers.Length; i++){
@@ -18,14 +22,24 @@ namespace NeuralNets{
                 Array.ForEach(NetMath.Range(layers[i-1].Neurons.Length), j => prevLayerValues[j] = layers[i-1].Neurons[j].Val);
                 for(int j = 0; j < layers[i].Neurons.Length; j++){
                     double dotSum = NetMath.DotProduct(prevLayerValues, layers[i].Neurons[j].Weights);
-                    double activated = NetMath.Sigmoid(dotSum + layers[i].Neurons[j].Bias);
+                    double activated = Sigmoid(dotSum + layers[i].Neurons[j].Bias);
                     layers[i].Neurons[j].Val = activated;
                 }
             }
         }
+        private double Sigmoid (double x, bool derivative = false) {
+            if(derivative)
+                return Math.Exp(-x)/Math.Pow((1+Math.Exp(-x)), 2);
+            return 1d / (1d + (double) Math.Exp (-x));
+        }
 
-        public void Train(Dataset dataset, double learningRate = 0.1){
-            double averageError = GetDatasetError(dataset);
+        public void Train(Dataset dataset, double learningRate = 0.1, int epochs = 1000, int epochInterval = 100){
+            for(int epoch = 0; epoch < epochs; epoch++){
+                if(epoch % epochInterval == 0)
+                    Console.WriteLine($"\rEpoch: {epoch}/{epochs} = {(int) 100*epoch/epochs}%");
+
+                double averageError = GetDatasetError(dataset);
+            }
 
         }
 
@@ -48,7 +62,16 @@ namespace NeuralNets{
         }
 
         public void BackPropagate(){
+            //Set hidden layers
+            for(int i = layers.Length-1; i >= 0; i--){
 
+            }
+
+
+
+
+            
+            
         }
 
         public void PrintNeuronValues(){
