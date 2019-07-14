@@ -3,6 +3,7 @@ using System;
 namespace NeuralNets{
     class Network{
         private Layer[] layers;
+        public double error;
         public Network(int[] dimensions){
             layers = new Layer[dimensions.Length];
             layers[0] = new Layer(dimensions[0], isInput: true);
@@ -12,7 +13,7 @@ namespace NeuralNets{
         }
 
         public void Propagate(){
-            for(int i = 0; i < layers.Length; i++){
+            for(int i = 1; i < layers.Length; i++){
                 double[] prevLayerValues = new double[layers[i-1].Neurons.Length];
                 Array.ForEach(NetMath.Range(layers[i-1].Neurons.Length), j => prevLayerValues[j] = layers[i-1].Neurons[j].Val);
                 for(int j = 0; j < layers[i].Neurons.Length; j++){
@@ -21,6 +22,14 @@ namespace NeuralNets{
                     layers[i].Neurons[j].Val = activated;
                 }
             }
+        }
+
+        public void Train(Dataset dataset){
+
+        }
+
+        public void BackPropagate(){
+
         }
 
         public void PrintNeuronValues(){
@@ -42,6 +51,10 @@ namespace NeuralNets{
             SetInputs(inputs);
             Propagate();
             return GetOutputs();
+        }
+
+        private void CalculateError(){
+
         }
 
         
