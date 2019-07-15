@@ -5,7 +5,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
     class Program {
         static void Main(string[] args) {
 
-            int[] dimensions = new int[] { 2, 2 };
+            int[] dimensions = new int[] { 2, 4, 2 };
 
             string dir = Environment.CurrentDirectory;
             string dataFileName = "data.txt";
@@ -33,7 +33,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
             }
 
 
-            Population population = new Population(500, dimensions);
+            Population population = new Population(10000, dimensions);
 
             population.PrintWeights(0);
 
@@ -43,7 +43,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
             string numInput;
 
         
-            population.Train(inputs, expected, epochs: 100000000, interval: 16384);
+            population.Train(inputs, expected, epochs: 10000000, interval: 163840);
             Console.WriteLine();
 
             do {
@@ -54,7 +54,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
 
                 for (int i = 0; i < nums.Length; i++) {
                     try {
-                        bool _ = Double.TryParse(numList[i], out nums[i]);
+                        Double.TryParse(numList[i], out nums[i]);
                     } catch (Exception _) {
                         Console.WriteLine("[ERROR: Wrong number of arguments]");
                     }
@@ -214,7 +214,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
             return GetOutputs();
         }
 
-        public void Mutate(double mutationRate = 0.1) {
+        public void Mutate(double mutationRate = 0.01) {
             for (int i = 1; i < layers.Length; i++) {
                 layers[i].Mutate(mutationRate);
             }
@@ -316,7 +316,7 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
             Random random = new Random();
             bias = (random.NextDouble() * 2) - 1;
             for (int i = 0; i < weightNum; i++) {
-                weights[i] = random.NextDouble() * 10 - 5;
+                weights[i] = (random.NextDouble() * 2)-1;
             }
         }
 
@@ -329,10 +329,10 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
             Random rand = new Random();
 
             if (rand.NextDouble() < mutationRate)
-                bias = (rand.NextDouble() * 6) - 3;
+                bias = (rand.NextDouble() * 2) - 1;
             for (int i = 0; i < weights.Length; i++) {
                 if (rand.Next() < mutationRate)
-                    weights[i] = rand.NextDouble() * 10 - 5;
+                    weights[i] = (rand.NextDouble() * 2) - 1;
             }
         }
     }
