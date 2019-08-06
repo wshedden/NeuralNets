@@ -52,8 +52,8 @@ namespace Neural_Networks { //---------------------------------- THE GENETIC ALG
                 for (int i = 0; i < nums.Length; i++) {
                     try {
                         Double.TryParse(numList[i], out nums[i]);
-                    } catch (Exception _) {
-                        Console.WriteLine("[ERROR: Wrong number of arguments]");
+                    } catch (Exception e) {
+                        throw new Exception(message:$"Data read fail at index {i}: {e.ToString()}");
                     }
                 }
 
