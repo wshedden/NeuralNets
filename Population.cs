@@ -5,7 +5,6 @@ namespace Neural_Networks {
     public class Population {
         int popSize;
         private Network[] networks;
-        double[] errors;
 
         public Population (int popSize, int[] dimensions) {
             this.popSize = popSize;
@@ -22,22 +21,37 @@ namespace Neural_Networks {
             }
         }
 
-        private void SortNetworks() {
-            //Bubble sort based on network error
-            bool sorted = false;
-            while (!sorted) {
-                sorted = true;
-                for (int i = 0; i < popSize - 1; i++) {
+        public List<Network> SortList(List<Network> l){
+            //Merge sort
+            if(l.Count == 1) return l;
+            List<Network> left = SortList(l.GetRange(0, l.Count/2));
+            List<Network> right = SortList(l.GetRange(l.Count/2, l.Count-(l.Count/2)));
+            return Merge(left, right);
+        }
 
-                    if (networks[i].error > networks[i + 1].error) {
-
-                        Network temp = networks[i];
-                        networks[i] = networks[i + 1];
-                        networks[i + 1] = temp;
-                        sorted = false;
-                    }
+        public List<Network> Merge(List<Network> a, List<Network> b){
+            List<Network> c = new List<Network>();
+            int i = 0;
+            int k = 0;
+            while(i < a.Count && k < b.Count){
+                if(a[i].error < b[k].error){
+                    c.Add(a[i]);
+                    i++;
+                } else {
+                    c.Add(b[k]);
+                    k++;
                 }
+
             }
+            if(i == a.Count) c.AddRange (b.GetRange (k, b.Count - k));
+            if(k == b.Count) c.AddRange (a.GetRange (i, a.Count - i));
+            return c;
+        }
+
+        public void SortNetworks() {
+            //Initiates merge sort
+            List<Network> l = new List<Network>(networks);
+            networks = SortList(l).ToArray();
         }
 
         private double GetSquaredDifference (double[] outputs, double[] expected) {
