@@ -1,2 +1,2 @@
-# NeuralNet-Primitive
-This is meant to be a primitive version of a neural network implementation.
+# NeuralNetworks-genetic
+Neural networks implementing a genetic algorithm.
