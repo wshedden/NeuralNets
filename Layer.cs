@@ -46,11 +46,6 @@ namespace Neural_Networks {
             }
         }
 
-        public void Mutate (double mutationRate) {
-            foreach (Neuron n in neurons) {
-                n.Mutate (mutationRate);
-            }
-        }
 
     }
 }

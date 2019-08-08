@@ -41,16 +41,6 @@ namespace Neural_Networks {
             Console.WriteLine ($"V={value}, B={bias}, W={weights != null && weights.Length != 0}");
         }
 
-        public void Mutate (double mutationRate) {
-            Random rand = new Random ();
-
-            if (rand.NextDouble () < mutationRate)
-                bias = (rand.NextDouble () * 2) - 1;
-            for (int i = 0; i < weights.Length; i++) {
-                if (rand.Next () < mutationRate)
-                    weights[i] = (rand.NextDouble () * 2) - 1;
-            }
-        }
     }
 
 }

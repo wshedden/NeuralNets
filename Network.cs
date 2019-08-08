@@ -4,6 +4,7 @@ namespace Neural_Networks {
     public class Network {
         private Layer[] layers;
         public double error;
+        public Genome genome;
 
         public Network (int[] dimensions) {
             int numOfLayers = dimensions.Length;
@@ -12,6 +13,7 @@ namespace Neural_Networks {
             for (int i = 1; i < numOfLayers; i++) {
                 layers[i] = new Layer (dimensions[i], layers[i - 1].neurons.Length);
             }
+            genome = new Genome(GetWeights(), GetBiases());
         }
 
         public void PrintNeuronValues () {
@@ -32,6 +34,13 @@ namespace Neural_Networks {
                 layers[layer].SetBiases (b[layer - 1]);
             }
         }
+
+        public void LoadDNA(){
+            SetWeights(genome.Weights);
+            SetBiases(genome.Biases);
+        }
+
+        
 
         public void PrintWeights () {
             double[][][] weights = GetWeights ();
@@ -108,10 +117,9 @@ namespace Neural_Networks {
             return GetOutputs ();
         }
 
-        public void Mutate (double mutationRate = 0.01) {
-            for (int i = 1; i < layers.Length; i++) {
-                layers[i].Mutate (mutationRate);
-            }
+        public void Mutate (double mutationRate = 0.1) {
+            genome.Mutate(mutationRate:mutationRate);
+            LoadDNA();
         }
 
     }
