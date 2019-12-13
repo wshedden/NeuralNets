@@ -1,51 +1,34 @@
 using System;
-namespace Neural_Networks {
-    public class Layer {
-        public Neuron[] neurons;
 
-        public Layer (int numOfNeurons) {
-            neurons = new Neuron[numOfNeurons];
-            for (int i = 0; i < numOfNeurons; i++) {
-                neurons[i] = new Neuron ();
+namespace GeneticAlgo {
+    class Layer {
+        private Neuron[] neurons;
+        Type type;
+        public Layer(Type type, int n, int prevN) {
+            neurons = new Neuron[n];
+            for (int i = 0; i < n; i++) {
+                neurons[i] = new Neuron(prevN);
             }
+            this.type = type;
         }
-
-        public Layer (int numOfNeurons, int weightNum) {
-
-            neurons = new Neuron[numOfNeurons];
-            for (int i = 0; i < numOfNeurons; i++) {
-                neurons[i] = new Neuron ();
-                neurons[i].SetWeightNum (weightNum);
-            }
-            InitializeLayer ();
-
-        }
-
-        private void InitializeLayer () {
+        public void SetValues(double[] val) {
             for (int i = 0; i < neurons.Length; i++) {
-                neurons[i].InitializeValues ();
+                neurons[i].value = val[i];
             }
         }
 
-        public void SetWeights (double[][] w) {
-            for (int neuron = 0; neuron < neurons.Length; neuron++) {
-                neurons[neuron].SetWeights (w[neuron]);
-            }
-        }
-
-        public void SetBiases (double[] b) {
-            for (int neuron = 0; neuron < neurons.Length; neuron++) {
-                neurons[neuron].bias = b[neuron];
-            }
-        }
-
-        public void PrintNeuronValues () {
+        public void PrintValues() {
             for (int i = 0; i < neurons.Length; i++) {
-                Console.Write ($"Neuron {i}: ");
-                neurons[i].PrintNeuronValues ();
+                Console.WriteLine($"\tNeurons [{i}]:");
+                neurons[i].PrintValues();
             }
         }
 
+
+        public Neuron[] Neurons {
+            get { return neurons; }
+        }
 
     }
+    
 }

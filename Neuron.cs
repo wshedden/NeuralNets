@@ -1,46 +1,35 @@
 using System;
 
-namespace Neural_Networks {
-    public class Neuron {
+namespace GeneticAlgo {
+    class Neuron {
         public double[] weights;
         public double bias;
-        public int weightNum;
-        private double value;
+        public double value;
 
-        public Neuron () { }
-
-        public void SetWeightNum (int weightNum) { //MUST SetWeightNum before calling InitializeValues
-            this.weightNum = weightNum;
-            weights = new double[weightNum];
+        public Neuron(int n) {
+            weights = new double[n];
+            Initialise();
         }
 
-        public double GetValue () {
-            return value;
-        }
-
-        public void SetWeights (double[] w) {
-            weights = new double[w.Length];
-            for (int weight = 0; weight < weights.Length; weight++) {
-                weights[weight] = w[weight];
+        private void Initialise(double minW = -1, double maxW = 1, double minB = -5, double maxB = 5) {
+            bias = Program.random.NextDouble() * (maxB - minB) + minB;
+            for (int i = 0; i < weights.Length; i++) {
+                weights[i] = Program.random.NextDouble() * (maxW - minW) + minW;
             }
         }
 
-        public void SetValue (double v) {
-            value = v;
+        public void Mutate (double rate){
+            if(Program.random.NextDouble() < rate) Initialise();
         }
 
-        public void InitializeValues () {
-            Random random = new Random ();
-            bias = (random.NextDouble () * 2) - 1;
-            for (int i = 0; i < weightNum; i++) {
-                weights[i] = (random.NextDouble () * 2) - 1;
+        public void PrintValues() {
+            Console.WriteLine($"\t\tBias = {bias}");
+            Console.WriteLine($"\t\t{weights.Length} Weights: ");
+            for (int i = 0; i < weights.Length; i++) {
+                Console.WriteLine($"\t\t\tWeights [{i}] = {weights[i]}");
             }
+            Console.WriteLine($"\t\tValue = {value}");
         }
-
-        public void PrintNeuronValues () {
-            Console.WriteLine ($"V={value}, B={bias}, W={weights != null && weights.Length != 0}");
-        }
-
     }
-
 }
+    

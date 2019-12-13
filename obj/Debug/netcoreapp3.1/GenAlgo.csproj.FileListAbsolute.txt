@@ -1,0 +1,11 @@
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo.deps.json
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo.runtimeconfig.json
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo.runtimeconfig.dev.json
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo.dll
+/home/will/cs/vscode/GenAlgo/bin/Debug/netcoreapp3.1/GenAlgo.pdb
+/home/will/cs/vscode/GenAlgo/obj/Debug/netcoreapp3.1/GenAlgo.csprojAssemblyReference.cache
+/home/will/cs/vscode/GenAlgo/obj/Debug/netcoreapp3.1/GenAlgo.AssemblyInfoInputs.cache
+/home/will/cs/vscode/GenAlgo/obj/Debug/netcoreapp3.1/GenAlgo.AssemblyInfo.cs
+/home/will/cs/vscode/GenAlgo/obj/Debug/netcoreapp3.1/GenAlgo.dll
+/home/will/cs/vscode/GenAlgo/obj/Debug/netcoreapp3.1/GenAlgo.pdb
